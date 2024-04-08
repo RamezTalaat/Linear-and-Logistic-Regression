@@ -42,15 +42,29 @@ class LogisticRegression:
       self.theta_X, self.theta_0 = self.gradientDescent()
     return [self.theta_X,self.theta_0]
 
+
+  def accuracy(self, yTest, yPredicted):
+      if len(yTest) != len(yPredicted):
+        return -1
+      
+      cnt = 0
+      for i in range(len(yTest)):
+        if yTest[i] == yPredicted[i]:
+          cnt+=1
+      
+      return cnt/ len(yTest)
+
+  
   #predict to make the out put is 0 or 1
   def predict(self, xtest):
     hypo = self.hypothesis(self.theta_0,self.theta_X,xtest)
     return [ 0 if result < 0.5 else 1 for result in hypo]
 
+
+  # def check_accuracy(self ,original, predicted):
+  #   print(original)
+  #   print(predicted)
+  #   if len(original) != len(predicted):
   
-  def accuracy(self):
-    predicted_labels = self.predict()
-    correct_predictions = np.sum(predicted_labels == self.yTrain)
-    total_samples = len(self.yTrain)
-    accuracy = correct_predictions / total_samples
-    return accuracy
+  
+    
